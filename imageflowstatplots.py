@@ -34,7 +34,7 @@ def read_flo_file(filename, memcached=False):
     return data2d
 
 class CustomDataset():
-  def __init__(self, data_path):
+  def __init__(self, data_path, file_limit):
     # get paths to frames and .flo files
     self.frames_dir = os.path.join('data', data_path, 'frames', "**/*.png")
     self.flo_dir = os.path.join('data', data_path, 'flow', "**/*.flo")
@@ -42,8 +42,12 @@ class CustomDataset():
     self.all_frame_paths = []
     self.all_flo_paths = []
     for filename in glob.iglob(self.frames_dir, recursive = True):
+        if file_limit and len(self.all_frame_paths) == file_limit:
+            break
         self.all_frame_paths.append(filename)
     for filename in glob.iglob(self.flo_dir, recursive = True):
+        if file_limit and len(self.all_flo_paths) == file_limit:
+            break
         self.all_flo_paths.append(filename)
     self.flows = []
     for filename in self.all_flo_paths:
@@ -59,10 +63,10 @@ class CustomDataset():
     # returns a list of the data path at index "idx"
     return self.all_frame_paths[idx]
 
-def load_datasets(data_paths):
+def load_datasets(data_paths, file_limit=0):
     datasets = []
-    for data in data_paths:
-        datasets.append(CustomDataset(data))
+    for data_path in data_paths:
+        datasets.append(CustomDataset(data_path, file_limit))
     return datasets
 
 # Luminance
@@ -260,7 +264,7 @@ def get_speed_direction(flow_matrices, speed_bins, dir_bins):
     for idx in range(len(flow_matrices)):
         current_flow = flow_matrices[idx][:,:]
         current_speed = np.sqrt(np.square(current_flow[0]) + np.square(current_flow[1]))
-        current_dir = np.degrees(np.arctan2(current_flow[1], current_flow[0]))
+        current_dir = np.arctan2(current_flow[:,:,1], current_flow[:,:,0]) * (180 / np.pi)
         speed_hist, _ = np.histogram(current_speed, speed_bins)
         dir_hist, _ = np.histogram(current_dir, dir_bins)
         total_speed += speed_hist
@@ -354,8 +358,3 @@ def plot_stats(datasets, labels, colors, plot_file_name, luminance_sample=0):
     fig.set_size_inches(16, 12)
     # when saving, specify the DPI
     plt.savefig(plot_file_name + ".png", dpi = 100)
-
-
-
-# Questions:
-# Cropping error

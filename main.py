@@ -3,8 +3,9 @@ import imageflowstatplots
 # Example of comparing the Middlebury and MPI-Sintel datasets with our library
 
 # data_paths should contain "flow" folder with .flo files and "data" folder with .png images (frames)
+# file_limit parameter limits how many .flo files and .png frames can be loaded in to each dataset
 # Returns list of CustomDataset objects that support __len__ and __getitem__ functions that return the number of frames in a dataset and the frame at a given index, respectively
-datasets = imageflowstatplots.load_datasets(data_paths=['Middlebury/training', 'MPI-Sintel-complete/training/'])
+datasets = imageflowstatplots.load_datasets(data_paths=['Middlebury/training', 'MPI-Sintel-complete/training/'], file_limit=100)
 
 # prints number of frames in Middlebury dataset
 print(len(datasets[0]))
@@ -88,5 +89,5 @@ print(len(datasets[1].get_flows()))
 labels = ["Middlebury", "Sintel"]
 colors = ["blue", "red"]
 plot_file_name = "my_plot"
-luminance_sample = 100000
+luminance_sample = 10000
 imageflowstatplots.plot_stats(datasets, labels, colors, plot_file_name, luminance_sample)
