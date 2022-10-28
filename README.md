@@ -13,4 +13,16 @@ To download the MBI-Sintel and Middlebury datasets for the demos, run
 
     chmod ug+x download_datasets.sh && ./download_datasets.sh
     
-By default plotter.py will search for the datasets in these locations. You can create symbolic links to wherever the datasets were downloaded in the datasets folder
+By default plotter.py will search for the .png and .flo files in these locations:
+
+    ├── data
+        ├── * [data_path]
+            ├── frames
+                ├── **/*.png
+            ├── flow
+                ├── **/*.flo
+        ├── * [data_path]
+            ├── frames
+                ├── **/*.png
+            ├── flow
+                ├── **/*.flo
