@@ -1,6 +1,5 @@
 # Image and Optical Flow Statistics Plotting Tool
-This repository contains visualization tools for plotting image and optical flow statistics (luminance, 
-power spectrum, spatial derivatives, motion, speed, and flow direction)
+This repository contains visualization tools for plotting image and optical flow statistics (luminance, power spectrum, spatial derivatives, motion, speed, and flow direction)
 from optical flow datasets containing frames and .flo files.
 
 # Requirements
@@ -10,3 +9,8 @@ This code has been tested with Python 3.7.6 and Pillow 9.2.0.
     conda activate plotenv
     
 # Demo
+To download the MBI-Sintel and Middlebury datasets for the demos, run
+
+    chmod ug+x download_datasets.sh && ./download_datasets.sh
+    
+By default plotter.py will search for the datasets in these locations. You can create symbolic links to wherever the datasets were downloaded in the datasets folder
