@@ -9,7 +9,7 @@ This code has been tested with Python 3.7.6 and Pillow 9.2.0.
     conda activate plotenv
     
 # Demo
-To download the MBI-Sintel and Middlebury datasets for the demos, run
+To download the [MBI-Sintel](http://sintel.is.tue.mpg.de/) and [Middlebury](https://vision.middlebury.edu/flow/data/) datasets for the demos, run
 
     chmod ug+x download_datasets.sh && ./download_datasets.sh
     
