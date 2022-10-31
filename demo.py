@@ -1,12 +1,49 @@
 import plotter
+import io
+import numpy as np
+import glob
 
-# Insert data loader to read in .flo files here
+# Demo of comparing the Middlebury and MPI-Sintel datasets with our library
+
+# Data loader to read in .flo files
+def read_flo_file(filename, memcached=False):
+    """
+    Read from .flo file
+    :param flow_file: name of the flow file
+    :return: optical flow data in matrix
+    """
+    if memcached:
+        filename = io.BytesIO(filename)
+    f = open(filename, 'rb')
+    magic = np.fromfile(f, np.float32, count=1)[0]
+    data2d = None
+
+    if 202021.25 != magic:
+        print('Magic number incorrect. Invalid .flo file')
+    else:
+        w = np.fromfile(f, np.int32, count=1)[0]
+        h = np.fromfile(f, np.int32, count=1)[0]
+        data2d = np.fromfile(f, np.float32, count=2 * w * h)
+        # reshape data into 3D array (columns, rows, channels)
+        data2d = np.resize(data2d, (h, w, 2))
+    f.close()
+    return data2d
 
 # datasets_count - number of datasets
 # total_frame_paths and total_flow_matrices contain the .png frame paths and flow matrices for each dataset, respectively
-datasets_count = 0
-total_frame_paths = []
-total_flow_matrices = []
+datasets_count = 2
+total_frame_paths = [[], []]
+total_flow_matrices = [[], []]
+
+frames_dirs = ['data/Middlebury/other-data/**/*.png', 'data/Sintel/MPI-Sintel-training_images/training/final/**/*.png']
+flow_dirs = ['data/Middlebury/other-gt-flow/**/*.flo', 'data/Sintel/MPI-Sintel-training_extras/training/flow/**/*.flo']
+
+# populating frame_paths and flow_matrices
+for i in range(datasets_count):
+    for filename in glob.iglob(frames_dirs[i], recursive = True):
+        total_frame_paths[i].append(filename)
+    for filename in glob.iglob(flow_dirs[i], recursive = True):
+        total_flow_matrices[i].append(read_flo_file(filename))
         
 # Plotting the graphs
 
@@ -77,9 +114,8 @@ total_flow_matrices = []
 # colors - colors that will be used in the plots
 # file_limit - extracts first {file_limit} .flo files and .png frames to be used in plotting 
 # luminance_sample - randomly sample [luminance_sample] pixels from each frame for the luminance plot (if not set, uses all pixels )
-
-labels = []
-colors = []
-file_limit = 0
-luminance_sample = 0
+labels = ["Middlebury", "Sintel"]
+colors = ["blue", "red"]
+file_limit = 1000
+luminance_sample = 100000
 plotter.plot_stats(total_frame_paths, total_flow_matrices, labels, colors, file_limit, luminance_sample)
