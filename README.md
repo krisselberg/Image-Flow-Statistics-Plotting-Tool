@@ -42,3 +42,7 @@ To plot all image statistics and optical flow statistics for the downloaded data
   <img src="/screenshots/direction.png" width=250 />
   <img src="/screenshots/spatial_flow_derivative.png" width=250 />
 </p>
+
+# Instructions
+
+Modify `main.py` for use with your own datasets.
