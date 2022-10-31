@@ -35,8 +35,8 @@ datasets_count = 2
 total_frame_paths = [[], []]
 total_flow_matrices = [[], []]
 
-frames_dirs = ['data/Middlebury/other-data/**/*.png', 'data/Sintel/MPI-Sintel-training_images/training/final/**/*.png']
-flow_dirs = ['data/Middlebury/other-gt-flow/**/*.flo', 'data/Sintel/MPI-Sintel-training_extras/training/flow/**/*.flo']
+frames_dirs = ['data/Middlebury/other-data/**/*.png', 'data/Sintel/training/final/**/*.png']
+flow_dirs = ['data/Middlebury/other-gt-flow/**/*.flo', 'data/Sintel/training/flow/**/*.flo']
 
 # populating frame_paths and flow_matrices
 for i in range(datasets_count):
