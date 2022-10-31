@@ -32,3 +32,13 @@ To plot all image statistics and optical flow statistics for the downloaded data
     python demo.py
     
 .png files of each plot will be saved under these file names: `luminance.png`, `power_spectra.png`, `spatial_derivative.png`, `motion.png`, `direction.png`, `speed.png`, and `spatial_flow_derivative.png`. This is the expected output from `demo.py`:
+
+<p align="middle">
+  <img src="/screenshots/luminance.png" width=250 />
+  <img src="/screenshots/power_spectra.png" width=250 />
+  <img src="/screenshots/spatial_derivative.png" width=250 />
+  <img src="/screenshots/motion.png" width=250 />
+  <img src="/screenshots/speed.png" width=250 /> 
+  <img src="/screenshots/direction.png" width=250 />
+  <img src="/screenshots/spatial_flow_derivative.png" width=250 />
+</p>
