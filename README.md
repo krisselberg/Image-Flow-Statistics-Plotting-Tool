@@ -12,20 +12,6 @@ This code has been tested with Python 3.7.6 and Pillow 9.2.0.
 To download the [MBI-Sintel](http://sintel.is.tue.mpg.de/) and [Middlebury](https://vision.middlebury.edu/flow/data/) datasets for the demos, run
 
     chmod ug+x download_datasets.sh && ./download_datasets.sh
-    
-The resulting directory structure is:
-
-    ├── data
-        ├── data_path
-            ├── frames
-                ├── **/*.png
-            ├── flow
-                ├── **/*.flo
-        ├── data_path
-            ├── frames
-                ├── **/*.png
-            ├── flow
-                ├── **/*.flo
                 
 To plot all image statistics and optical flow statistics for the downloaded datasets, run
 
