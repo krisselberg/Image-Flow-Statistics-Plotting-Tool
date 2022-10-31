@@ -13,7 +13,7 @@ To download the [MBI-Sintel](http://sintel.is.tue.mpg.de/) and [Middlebury](http
 
     chmod ug+x download_datasets.sh && ./download_datasets.sh
     
-By default `plotter.py` will search for the .png and .flo files in these locations with `data_path` representing the parameter you input into load_datasets():
+The resulting directory structure is:
 
     ├── data
         ├── data_path
@@ -26,3 +26,9 @@ By default `plotter.py` will search for the .png and .flo files in these locatio
                 ├── **/*.png
             ├── flow
                 ├── **/*.flo
+                
+To plot all image statistics and optical flow statistics for the downloaded datasets, run
+
+    python demo.py
+    
+.png files of each plot will be saved under these file names: `luminance.png`, `power_spectra.png`, `spatial_derivative.png`, `motion.png`, `direction.png`, `speed.png`, and `spatial_flow_derivative.png`. This is the expected output from `demo.py`:
